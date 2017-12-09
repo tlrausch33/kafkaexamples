@@ -18,9 +18,13 @@ public class KafkaProducer {
         Producer<String,String> producer = new org.apache.kafka.clients.producer.KafkaProducer<String, String>(properties);
 
 
+
+        ProducerRecord<String, String> firstRecord = new ProducerRecord<String, String>("first_topic", "start of loop");
+        producer.send(firstRecord);
+
+
         for (int key=0; key < 10; key++){
-            ProducerRecord<String, String> producerRecord =
-                    new ProducerRecord<String, String>("first_topic", Integer.toString(key), "message that has key: " + Integer.toString(key));
+            ProducerRecord<String, String> producerRecord = new ProducerRecord<String, String>("first_topic", Integer.toString(key), "message that has key: " + Integer.toString(key));
             producer.send(producerRecord);
         }
 
